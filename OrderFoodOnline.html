@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu List</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ff00ff;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            margin-right: 10px;
+            flex: 1;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            color: #00ffff;
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+        li {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            color: #00ffff;
+        }
+        .add-form {
+            display: flex;
+            justify-content: center;
+        }
+        .add-form input[type="text"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Food Online</h1>
+
+        <form action="/search"  method="post">
+            <input type="text" name="searchitem" placeholder="Search Food" required="required">
+            <button type="submit">Search</button>
+        </form>
+
+       
+
+        <form class="add-form" action="/ordermenu"  method="post">
+            <button type="submit">See full Menu</button>
+        </form>
+    </div>
+</body>
+</html>

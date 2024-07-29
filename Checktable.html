@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f06, #f9a);
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            padding: 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #6200ea;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #3700b3;
+        }
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/tbl101" method="post">
+             <button class="button" onclick="openPopup('popup101')">101 (For 2)</button>
+        </form>
+        
+        <form action="/tbl102" method="post">
+             <button class="button" onclick="openPopup('popup102')">102 (For 2)</button>
+        </form>
+        
+        <form action="/tbl103" method="post">
+           <button class="button" onclick="openPopup('popup103')">103 (For 2)</button>
+        </form>
+        
+        <form action="/tbl104" method="post">
+            <button class="button" onclick="openPopup('popup104')">104 (For 2)</button>
+        </form>
+        
+        <form action="/tbl201" method="post">
+            <button class="button" onclick="openPopup('popup201')">201 (For 4)</button>
+        </form>
+        
+        <form action="/tbl202" method="post">
+           <button class="button" onclick="openPopup('popup202')">202 (For 4)</button>
+        </form>
+        
+        <form action="/tbl203" method="post">
+             <button class="button" onclick="openPopup('popup203')">203 (For 4)</button>
+        </form>
+        <form action="/tbl204" method="post">
+         <button class="button" onclick="openPopup('popup204')">204 (For 4)</button>
+        </form>
+        <form action="/tbl301" method="post">
+             <button class="button" onclick="openPopup('popup301')">301 (For 6)</button>
+        </form>
+        <form action="/tbl302" method="post">
+            <button class="button" onclick="openPopup('popup302')">302 (For 6)</button>
+        </form>
+        <form action="/tbl303" method="post">
+           <button class="button" onclick="openPopup('popup303')">303 (For 6)</button>
+        </form>
+        <form action="/tbl304" method="post">
+            <button class="button" onclick="openPopup('popup304')">304 (For 6)</button>
+        </form>
+    </div>
+</body>
+</html>

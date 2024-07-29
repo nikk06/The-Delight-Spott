@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finial Billing</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #cce5ff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .savings-notice {
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .billing-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-item, .coupons, .customer-info, .delivery-option, .payment-option {
+            margin-bottom: 15px;
+        }
+
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8d7da;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .food-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control button {
+            border: none;
+            background-color: #ff5252;
+            color: white;
+            padding: 3px 6px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .quantity-control input {
+            width: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 5px;
+            font-size: 14px;
+            padding: 3px;
+        }
+
+        .food-price {
+            font-weight: bold;
+            color: #ff5252;
+            font-size: 14px;
+        }
+
+        .coupons {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff3cd;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .coupon-notice {
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .remove-coupon {
+            border: none;
+            background-color: #ff5252;
+            color: white;
+            padding: 3px 6px;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .customer-info .info-row {
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .form-input:focus {
+            border-color: #ff5252;
+            outline: none;
+            box-shadow: 0 0 5px #ff5252;
+        }
+
+        .delivery-option, .payment-option {
+            display: flex;
+            flex-direction: column;
+            background-color: #d4edda;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .total-bill {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            color: #ff5252;
+        }
+
+        .submit-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .submit-button1 {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            
+        }
+
+        .submit-button1:hover {
+            background-color: #0056b3;
+        }
+
+        address {
+            font-style: normal;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .quantity-control input {
+                width: 25px;
+            }
+
+            .submit-button {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body bgcolor="">
+    <div class="container">
+        <form class="billing-form" action="/finalsave" method="post">
+            <div class="header">
+                <p class="savings-notice"><h2>The Delight Spot(Bar & Restro), Final Billing</h2></p>
+            </div>
+            
+             <div class="food-items">
+                <div th:each="foodItem, iterStat: ${foodItems}">
+                    <div class="food-item">
+                        <span th:text="${foodItem}"></span>
+                         <input type="hidden" name="foodItems[${iterStat.index}].name" th:value="${foodItem}">
+                         
+                         <div th:each="Price,iterStat:${price}">
+                         <div>
+                         <span th:text="${Price}"></span>
+                        <input type="hidden" name="foodItems[${iterStat.index}].price" th:value="${Price}">
+                         </div>
+                         </div>
+                    </div>
+                      
+                </div>
+        
+            </div>
+            
+               
+              
+            <div class="coupons">
+                <span class="coupon-notice">You saved <span th:text="${d6}"></span> with 'HUNGRY25'</span>
+                <input type="hidden" name="coupon" th:value="${d6}">
+            </div>
+            
+            <div class="customer-info">
+                <div class="info-row">
+                    <label for="customer-name" class="form-label">Customer Name:</label>
+                      <span th:text="${d2}"></span>
+                       <input type="hidden" name="cutomername" th:value="${d2}">
+                </div>
+    
+                <div class="info-row">
+                    <label for="phone" class="form-label">Phone Number:</label>
+                    <span th:text="${d3}"></span>
+                      <input type="hidden" name="phoneno" th:value="${d3}">
+             </div>
+            
+            <div class="info-row">
+                    <label for="phone" class="form-label">Order Id:</label>
+                    <span th:text="${d7}"></span>
+                      <input type="hidden" name="orderId" th:value="${d7}">
+            </div>
+            
+            <div class="delivery-option">
+                <span>Food Prepared in <span th:text="${d5}"></span> mins</span>
+                  <input type="hidden" name="time" th:value="${d5}">
+                <span>Delivery at Home</span>
+              <span th:text="${d4}"></span>
+                <input type="hidden" name="address" th:value="${d4}"> 
+            </div>
+            
+            <div class="payment-option">
+                <span class="total-bill">Total Bill: <span th:text="${total}"></span></span>
+                  <input type="hidden" name="totalbill" th:value="${total}">
+                <span class="savings">You saved &nbsp;<span th:text="${d6}"></span></span>
+             
+                <label for="payment-method" class="form-label">Payment Option:</label>
+                <select id="payment-method" name="paymentmethod" class="form-input" required>
+                    <option value="online">Pay Online</option>
+                    <option value="cash">Cash on Delivery</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="submit-button">Place Order</button>
+        </form>
+        <form action="/returnback" method="post">
+        <button type="submit" class="submit-button1">Go Back</button>
+        </form>
+         
+    </div>
+</body>
+</html>
