@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MENU</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <style type="text/css">
+     body::before {
+    content: none !important;
+} 
+        body {
+            background: linear-gradient(to right, #8f94fb, #4e54c8);
+        }    
+
+        .menu-card-container {
+            margin: 20px 15%;
+            width: 60%;
+            background: #000000; 
+            background: linear-gradient(to right, #434343, #000000); 
+            padding: 5%;
+            border-radius: 40px;
+        }
+
+        h1 {
+            background-image: linear-gradient(to right, #ee00ff 0%, #fbff00 100%);
+            color: transparent;
+            -webkit-background-clip: text;
+            text-align: center;
+            font-size: 60px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        h2 {
+            background-image: linear-gradient(to right, #ee00ff 0%, #fbff00 100%);
+            color: transparent;
+            -webkit-background-clip: text;
+            text-align: center;
+            font-size: 40px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        ul {
+            font-size: 30px;
+            color: #8f94fb;
+        }
+
+        a:link {
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #4e54c8;
+        }
+
+        a:active {
+            color: rgb(0, 0, 0);
+        }
+
+        h3 {
+            font-size: 30px;
+            text-align: center;
+            color: #fff;
+            font-family: 'Caveat', cursive;
+        }
+
+        .credit a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .credit {
+            color: #fff;
+            text-align: center;
+            margin-top: 10px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        @media only screen and (max-width: 860px) {
+            h1 {
+                font-size: 38px;
+            }
+            .menu-card-container {
+                margin: 20px 5%;
+                width: 80%;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            .menu-card-container {
+                margin: 20px 1%;
+                width: 88%;
+            }
+            ul {
+                font-size: 20px;
+                color: #8f94fb;
+            }
+            h2 {
+                font-size: 18px;
+            }
+            h3 {
+                font-size: 18px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        ::selection {
+            background: #4158d0;
+            color: #fff;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f0f8ff; /* Light blue background */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .styled-table th {
+            background-color: #c6e2ff; /* Lighter blue for header */
+            color: #333;
+            font-weight: bold;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background-color: #e9f5ff; /* Even rows */
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #d1e7ff; /* Hover effect */
+        }
+
+        .styled-table tbody td:last-child {
+            border-right: none;
+        }
+
+        .button-24 {
+            background: white;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color:red;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            width: 90px;
+        }
+
+        .button-24:hover,
+        .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+        }
+
+        .button-24:active {
+            opacity: .5;
+        }
+         .copy-icon {
+            cursor: pointer;
+            color: blue; /* Set the color to blue */
+        }
+         .popup {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            text-align: center; /* Centered content */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Added box shadow */
+            background: linear-gradient(to right, #ff512f, #dd2476); /* Neon gradient background */
+            color: white; /* Text color */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media only screen and (max-width: 860px) {
+            h1 {
+                font-size: 38px;
+            }
+
+            .menu-card-container {
+                margin: 20px 5%;
+                width: 80%;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .menu-card-container {
+                margin: 20px 1%;
+                width: 88%;
+            }
+
+            ul {
+                font-size: 20px;
+                color: #8f94fb;
+            }
+            }
+    </style>
+</head>
+<body>
+    <div class="menu-card-container">
+        <h2><b>The Delight Spot</b> <br> <small><i>~ always fresh..always hot </i></small></h2>
+        <h3><i><b>Menu For You</b></i></h3>
+        <div id="imageContainer">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Dish Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Dish Image</th>
+                        <th>Add to cart</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="im:${lt}">
+                        <td >
+              <span class="Ykey" th:text="${im.Dishname}"></span>
+              <span class="copy-icon" onclick="copyToClipboard(this)">⧉</span>
+              </td>
+                        <td th:text="${im.DishQuantity}"></td>
+                        <td th:text="${im.DishPrice}"></td>
+                        <td th:text="${im.Description}"></td>
+                        <td><img alt="" th:src="@{'Menus/'+${im.dimage1}}" width="120%" height="110px" id="myImage" style="width: 165px;"></td>
+                        <td>
+                            <h4><a  class="button-24" role="button" onclick="openRegistrationForm()">ADD</a></h4>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+         <!-- Popup registration form -->
+    <div id="registrationPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeRegistrationForm()">&times;</span>
+            <h2 style="margin-bottom: 20px;color:black;">Add Item to Cart</h2>
+            <form action="/addtocart" method="post"> 
+                <div style="margin-bottom: 15px;">
+                    <label for="dishName">Dish Name:</label><br>
+                    <input type="text" id="dishName" name="dishName" style="width: 80%; padding: 10px; border-radius: 5px;" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="quantity">Quantity:</label><br>
+                    <select id="quantity" name="quantity" style="width: 80%; padding: 10px; border-radius: 5px;">
+                        <option value="full">Full</option>
+                        <option value="half">Half</option>
+                    </select>
+                </div>
+                 <div style="margin-bottom: 15px;">
+                    <label for="Name">Receiver's Name</label><br>
+                    <input type="text" id="name" name="name" style="width: 80%; padding: 10px; border-radius: 5px;" required>
+                </div>
+                 <div style="margin-bottom: 15px;">
+                    <label for="mobileno">Receiver's mobile number</label><br>
+                    <input type="number" id="mno" name="mno" style="width: 80%; padding: 10px; border-radius: 5px;" required>
+                </div>
+                 <div style="margin-bottom: 15px;">
+                    <label for="Address">Delivery Address</label><br>
+                    <textarea id="address" name="address" rows="9" placeholder="Enter your full address(eg: pin code, house no, street etc.)" style="width: 80%;"></textarea> <!-- Ensure full width -->
+                </div>
+                <div style="text-align: center;">
+                    <input type="submit" value="Add to Cart" class="button-24" style="width: 200px; font-size:22px;color:black;" required>
+                </div>
+            </form>
+        </div>
+    </div>
+        <hr><br>
+        <img src="foodimage1.jpg" width="100px" height="100px">
+        <img src="foodimage2.jpg" width="100px" height="100px">
+         <img src="foodimage3.jpg" width="100px" height="100px">
+        <img src="endimage.png" width="200px" height="200px">
+        <img src="foodimage4.jpg" width="100px" height="100px">
+         <img src="foodimage5.jpg" width="100px" height="100px">
+          <img src="foodimage6.jpg" width="100px" height="100px">
+        <h3><b><a href="OrderFoodOnline.html" style="color:White;">Go Back</a> </b></h3>
+    </div>
+    <script type="text/javascript">
+    function copyToClipboard(element) {
+        // Get the text to copy
+        var text = element.parentNode.querySelector('.Ykey').innerText;
+
+        // Create a temporary textarea element
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+
+        // Hide the textarea from view
+        textarea.style.position = 'fixed';
+        textarea.style.top = 0;
+        textarea.style.left = 0;
+        textarea.style.opacity = 0;
+
+        // Append the textarea to the body
+        document.body.appendChild(textarea);
+
+        // Select and copy the text
+        textarea.select();
+        document.execCommand('copy');
+
+        // Remove the textarea from the body
+        document.body.removeChild(textarea);
+
+        // Inform the user that the text has been copied
+        
+        alert('Seller unique_key:'+ text+'\t'+'Copied Succefully')
+    }
+    
+    function openRegistrationForm() {
+        document.getElementById('registrationPopup').style.display = 'block';
+    }
+    function closeRegistrationForm() {
+        document.getElementById('registrationPopup').style.display = 'none';
+    }
+    </script>
+</body>
+</html>

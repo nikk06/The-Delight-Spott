@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Table Manage Form</h2>
+        <form action="/svemg" method="post">
+            <label for="name">Name:</label>
+            <input type="text"  name="tname" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="number"  name="tphone" pattern="[0-9]{10}" required>
+            
+            <label for="time">Reservation Time:</label>
+            <input type="datetime-local"  name="ttime" required>
+
+            <label for="tableNo">Table Number:</label>
+            <select  name="tableNo" required>
+                <optgroup label="Table for 2">
+                    <option value="101">Table No 101</option>
+                    <option value="102">Table No 102</option>
+                    <option value="103">Table No 103</option>
+                    <option value="104">Table No 104</option>
+                </optgroup>
+                <optgroup label="Table for 4">
+                    <option value="201">Table No 201</option>
+                    <option value="202">Table No 202</option>
+                    <option value="203">Table No 203</option>
+                    <option value="204">Table No 204</option>
+                </optgroup>
+                <optgroup label="Table for 6">
+                    <option value="301">Table No 301</option>
+                    <option value="302">Table No 302</option>
+                    <option value="303">Table No 303</option>
+                    <option value="304">Table No 304</option>
+                </optgroup>
+            </select>
+            <button type="submit">Manage</button>
+        </form>
+        <a href="Listofreservation.html">
+         <button type="submit">Go_Back</button>
+         </a>
+    </div>
+</body>
+</html>

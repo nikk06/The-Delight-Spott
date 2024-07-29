@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- fontawesome cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Bootstrap cdn -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <!-- aos cdn -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- link css, media and favicon -->
+    <link rel="stylesheet" href="style3.css">
+    <link rel="shortcut icon" href="reservelogo.png" type="image/png" />
+    <script src="script3.js"></script>
+
+    <title>Dining Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #000;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(to bottom, #88d3ce, #6ebebb); /* Light blue gradient background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], input[type="number"], input[type="file"], input[type="date"], select {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+
+        .time-select {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .time-select div {
+            width: 48%;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .reserve:hover {
+            background-color: #0056b3;
+        }
+
+        .reserve {
+            cursor: pointer;
+        }
+
+        button:hover:enabled {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 80%;
+            }
+
+            .time-select {
+                flex-direction: column;
+            }
+
+            .time-select div {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .buttons button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- navbar -->
+
+    <nav class="navbar navbar-expand-lg sticky-top border-bottom" id="nav_bar">
+      <div class="container-fluid px-md-5">
+        <a class="navbar-brand" href="#"
+          ><img src="logoofdelightsopt.png" alt="" height="65px" id="nav_img"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler"><i class="fa-solid fa-bars"></i></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end text-center pe-3"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item" id="nav_a1">
+              <a href="#" class="star-rating">
+        <span class="filled">&#9733;</span>
+        <span class="filled">&#9733;</span>
+        <span class="filled">&#9733;</span>
+      </a>
+            </li>
+            <li class="nav-item" id="nav_a3">
+              <a href="#">
+            <div class="review">
+                <span class="review-symbol">&#9993;</span> <!-- Review symbol (speech balloon) -->
+                <span class="review-text">Check Reviews</span>
+            </div>
+        </a>
+            </li>
+            <li class="nav-item" id="nav_a4">
+              <span class="nav-link">Table Charges:- 250 - 550</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- carousel -->
+
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide carousel-fade top_carousel"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div
+          class="carousel-item active container-fluid py-md-5"
+          data-bs-interval="4000"
+        >
+          <div class="row g-0">
+            <img src="https://raw.githubusercontent.com/vinayshilpani/An-NGO-Website/master/assets/carousel-1.png" alt="" class="img-fluid w-50" />
+            <div
+              class="col-6 d-flex justify-content-center align-items-center anime-2"
+            >
+              <div class="ps-md-5">
+                <h5 class="">
+                   Book Your Dining, Easily
+                  <img
+                    src="https://raw.githubusercontent.com/vinayshilpani/An-NGO-Website/master/assets/love-icon.png"
+                    alt=""
+                    class="m-0"
+                    width="10px"
+                  />
+                </h5>
+                <h1>
+                 High-end, formal settings with a focus on exceptional service and high-quality ingredients. Often features elaborate menus and a carefully curated wine list.
+                </h1>
+              </div>
+            </div>
+            <div class="col-6 anime-3">
+              <img src="dining1.jpeg" alt="" class="img-fluid w-100" />
+            </div>
+          </div>
+        </div>
+        <div
+          class="carousel-item container-fluid py-md-5"
+          data-bs-interval="4000"
+        >
+          <div class="row">
+            <img src="https://raw.githubusercontent.com/vinayshilpani/An-NGO-Website/master/assets/carousel-1.png" alt="" class="img-fluid w-50" />
+            <div class="col-6 anime-2">
+              <img src="dining2.jpeg" alt="" class="img-fluid w-100" />
+            </div>
+            <div
+              class="col-6 d-flex justify-content-center align-items-center anime-3"
+            >
+              <div>
+                <h5 class="">
+                  Casual Dining
+                  <img
+                    src="https://raw.githubusercontent.com/vinayshilpani/An-NGO-Website/master/assets/love-icon.png"
+                    alt=""
+                    class="m-0"
+                    width="10px"
+                  />
+                </h5>
+                <h1>
+                 Relaxed atmosphere with moderately priced menus. Offers table service, but with a more laid-back ambiance compared to fine dining.
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="carousel-item container-fluid py-md-5"
+          data-bs-interval="4000"
+        >
+          <div class="row">
+            <img src="https://raw.githubusercontent.com/vinayshilpani/An-NGO-Website/master/assets/carousel-1.png" alt="" class="img-fluid w-50" />
+            <div
+              class="col-6 d-flex justify-content-center align-items-center anime-2"
+            >
+              <div class="ps-md-5">
+                <h5 class="">
+                  Ambience
+                  <img
+                    src="https://raw.githubusercontent.com/vinayshilpani/An-NGO-Website/master/assets/love-icon.png"
+                    alt=""
+                    class="m-0"
+                    width="10px"
+                  />
+                </h5>
+                <h1>
+                 Includes the restaurant's decor, lighting, music, and overall atmosphere. Aims to create a specific mood that enhances the dining experience.
+                </h1>
+              </div>
+            </div>
+            <div class="col-6 anime-3">
+              <img src="dining3.jpeg" alt="" class="img-fluid w-100" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+
+    <div class="container">
+         <img src="https://raw.githubusercontent.com/vinayshilpani/An-NGO-Website/master/assets/love-icon.png" alt="" width="30px" />
+          <h2>Make a <span>Reservation</span></h2>
+        
+        <form action="/bookdining" method="post" enctype="multipart/form-data">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="Reqname" required>
+
+            <label for="idProof">ID Proof:</label>
+            <input type="file" id="idProof" name="ReqidProof" accept="image/*" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="number" id="phone" name="Reqphone" required>
+
+            <label for="tableFor">Table For:</label>
+            <select id="tableFor" name="ReqtableFor" required>
+                <option value="2">2 Person</option>
+                <option value="4">4 Person</option>
+                <option value="6">6 Person</option>
+            </select>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="Reqdate" required>
+            <label for="date">Current Status</label>
+            <input type="text" id="Status" name="Status" value="Nill" readonly required>
+            <div class="time-select">
+                <div>
+                    <label for="timeFrom">Visiting Time</label>
+                    <select id="timeFrom" name="ReqtimeFrom" required>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="timeTo">Ending Time</label>
+                    <select id="timeTo" name="ReqtimeTo" required>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                        <option value="22:00">10:00 PM</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="reserve">Reserve</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- bootstrap script -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+        document.getElementById('date').setAttribute('max', today);
+      });
+    </script>
+  </body>
+</html>

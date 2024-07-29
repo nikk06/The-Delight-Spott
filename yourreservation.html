@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Resevations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .img-container {
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                margin: 0 0 1rem 0;
+                border: 1px solid #ccc;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                box-sizing: border-box;
+            }
+            td:before {
+                position: absolute;
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                white-space: nowrap;
+                font-weight: bold;
+                color: #007bff;
+            }
+         
+        }
+         .copy-icon {
+            cursor: pointer;
+            color: blue; /* Set the color to blue */
+        }
+         .button-24 {
+            background: #FF4742;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            width: 90px;
+        }
+
+        .button-24:hover,
+        .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+        }
+
+        .button-24:active {
+            opacity: .5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <h2>Your Phone_No:-</h2>
+    <h2 th:text="${name}"></h2>
+       <u> <h1>Your Reservations</h1></u>
+    </header>
+    <div class="container">
+        <table>
+         <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Id Proof</th>
+                        <th>Phone Number</th>
+                        <th>Table For</th>
+                        <th>Date</th>
+                        <th>Visiting Time</th>
+                         <th>Ending Time</th>
+                          <th>Current Status</th>
+                          <th>Cancel Reservation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="im:${lst1}">
+              <td>
+              <span class="" th:text="${im.Reqname}"></span>
+             
+              </td>
+               <td><img alt="" th:src="@{'idproof/'+${im.ReqidProof}}" width="120%" height="110px" id="myImage" style="width: 165px;"></td>
+                     
+                         <td>
+              <span class="Ykey" th:text="${im.Reqphone}"></span>
+              <span class="copy-icon" onclick="copyToClipboard(this)">⧉</span>
+              </td>
+                        <td th:text="${im.ReqtableFor}"></td>
+                        <td th:text="${im.Reqdate}"></td>
+                        <td th:text="${im.ReqtimeFrom}"></td>
+                        <td th:text="${im.ReqtimeTo}"></td>
+                        <td th:text="${im.Status}"></td>
+                        <td>
+                            <h4><a href="Deleteyresv.html" class="button-24" role="button">Cancel</a></h4>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+     <script type="text/javascript">
+    function copyToClipboard(element) {
+        // Get the text to copy
+        var text = element.parentNode.querySelector('.Ykey').innerText;
+
+        // Create a temporary textarea element
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+
+        // Hide the textarea from view
+        textarea.style.position = 'fixed';
+        textarea.style.top = 0;
+        textarea.style.left = 0;
+        textarea.style.opacity = 0;
+
+        // Append the textarea to the body
+        document.body.appendChild(textarea);
+
+        // Select and copy the text
+        textarea.select();
+        document.execCommand('copy');
+
+        // Remove the textarea from the body
+        document.body.removeChild(textarea);
+
+        // Inform the user that the text has been copied
+        
+        alert('Seller unique_key:'+ text+'\t'+'Copied Succefully')
+    }
+    </script>
+</body>
+</html>

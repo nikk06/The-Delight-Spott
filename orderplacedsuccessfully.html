@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Order Placed</title> 
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+	<style>
+	h1 {
+  position: absolute;
+  margin-top: 30vh;
+  width: 100%;
+  text-align: center;
+  font-size: 333%;
+  font-family: sans-serif;
+  color: grey;
+  opacity: 0.5;
+}
+
+canvas {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+}
+.button {
+  width: 120px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  border: 3px solid rgb(255, 239, 94);
+  background-color: rgb(255, 239, 94);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.137);
+  margin-left:530px;
+  margin-bottom:100px;
+}
+
+.text {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(27, 27, 27);
+  color: white;
+}
+
+.arrow path {
+  fill: rgb(19, 19, 19);
+}
+
+.button:hover .arrow {
+  animation: slide-in-left 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-8px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+	</style>
+  </head>
+  <body>
+ 
+  <h1>Order Placed Successfully...</h1>
+ <form action="/ssc" method="post">
+ <button class="button">
+  <span class="text">Got It</span>
+  <svg class="arrow" viewBox="0 0 448 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+</button>
+ </form>
+<canvas id="canvas"></canvas>
+<script>
+let W = window.innerWidth;
+let H = window.innerHeight;
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
+const maxConfettis = 150;
+const particles = [];
+
+const possibleColors = [
+  "DodgerBlue",
+  "OliveDrab",
+  "Gold",
+  "Pink",
+  "SlateBlue",
+  "LightBlue",
+  "Gold",
+  "Violet",
+  "PaleGreen",
+  "SteelBlue",
+  "SandyBrown",
+  "Chocolate",
+  "Crimson"
+];
+
+function randomFromTo(from, to) {
+  return Math.floor(Math.random() * (to - from + 1) + from);
+}
+
+function confettiParticle() {
+  this.x = Math.random() * W; // x
+  this.y = Math.random() * H - H; // y
+  this.r = randomFromTo(11, 33); // radius
+  this.d = Math.random() * maxConfettis + 11;
+  this.color =
+    possibleColors[Math.floor(Math.random() * possibleColors.length)];
+  this.tilt = Math.floor(Math.random() * 33) - 11;
+  this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+  this.tiltAngle = 0;
+
+  this.draw = function() {
+    context.beginPath();
+    context.lineWidth = this.r / 2;
+    context.strokeStyle = this.color;
+    context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+    context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+    return context.stroke();
+  };
+}
+
+function Draw() {
+  const results = [];
+
+  // Magical recursive functional love
+  requestAnimationFrame(Draw);
+
+  context.clearRect(0, 0, W, window.innerHeight);
+
+  for (var i = 0; i < maxConfettis; i++) {
+    results.push(particles[i].draw());
+  }
+
+  let particle = {};
+  let remainingFlakes = 0;
+  for (var i = 0; i < maxConfettis; i++) {
+    particle = particles[i];
+
+    particle.tiltAngle += particle.tiltAngleIncremental;
+    particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+    particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+    if (particle.y <= H) remainingFlakes++;
+
+    // If a confetti has fluttered out of view,
+    // bring it back to above the viewport and let if re-fall.
+    if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
+      particle.x = Math.random() * W;
+      particle.y = -30;
+      particle.tilt = Math.floor(Math.random() * 10) - 20;
+    }
+  }
+
+  return results;
+}
+
+window.addEventListener(
+  "resize",
+  function() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  },
+  false
+);
+
+// Push new confetti objects to `particles[]`
+for (var i = 0; i < maxConfettis; i++) {
+  particles.push(new confettiParticle());
+}
+
+// Initialize
+canvas.width = W;
+canvas.height = H;
+Draw();
+</script>
+  </body>
+</html>
